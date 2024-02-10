@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:aka_chat/auth/login_or_register.dart';
 import 'package:aka_chat/pages/login.dart';
 import 'package:aka_chat/themes/light_mode.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: LoginOrRegister(),
       theme: lightMode,
     );
   }
