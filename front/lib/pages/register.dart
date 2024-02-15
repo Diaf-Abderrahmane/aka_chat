@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:aka_chat/auth/auth_service.dart';
 import 'package:aka_chat/components/my_button.dart';
 import 'package:aka_chat/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,33 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key, this.onTap});
 
   //register method
-  void register() {
-    //authentication
+  void register(BuildContext context) async {
+    // auth service
+    final authService = AuthService();
+
+    // if passwords match --> signup user
+    if (_confirmPwController.text == _pwlController.text) {
+      try {
+        authService.signUpWithEmailPassword(
+            _emailController.text, _pwlController.text);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
+      }
+    }
+    // passwords don't match --> tell user to fix
+    else {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Passwords don't match !"),
+        ),
+      );
+    }
   }
 
   @override
@@ -23,6 +49,7 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //logo
           Icon(
@@ -64,7 +91,7 @@ class RegisterPage extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 25,
+            height: 10,
           ),
 
           //confirm password textfield
@@ -81,7 +108,7 @@ class RegisterPage extends StatelessWidget {
           //login button
           MyButton(
             text: "Register",
-            onTap: register,
+            onTap: () => register(context),
           ),
 
           SizedBox(
@@ -100,7 +127,9 @@ class RegisterPage extends StatelessWidget {
                 onTap: onTap,
                 child: Text(
                   "Login now",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary),
                 ),
               ),
             ],

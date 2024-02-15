@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "552817073225",
+    "project_id": "aka-chat-4e550",
+    "storage_bucket": "aka-chat-4e550.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552817073225:android:ef828df41fc10a29e2f398",
+        "android_client_info": {
+          "package_name": "com.example.aka_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHNh9Qssu1nx8VNzzQ8WgM3yY3H5hunOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

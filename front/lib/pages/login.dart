@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:aka_chat/auth/auth_service.dart';
 import 'package:aka_chat/components/my_button.dart';
 import 'package:aka_chat/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +15,25 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key, this.onTap});
 
   //login method
-  void login() {
-    //authentication
+  void login(BuildContext context) async {
+    // auth service class
+    final authService = AuthService();
+
+    // try login
+    try {
+      await authService.signInWithEmailPassword(
+          _emailController.text, _pwlController.text);
+    }
+
+    // catch errors
+    catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
+    }
   }
 
   @override
@@ -21,6 +41,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //logo
           Icon(
@@ -68,7 +89,7 @@ class LoginPage extends StatelessWidget {
           //login button
           MyButton(
             text: "Login",
-            onTap: login,
+            onTap: () => login(context),
           ),
 
           SizedBox(
@@ -86,8 +107,10 @@ class LoginPage extends StatelessWidget {
               GestureDetector(
                 onTap: onTap,
                 child: Text(
-                  "Register now",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  " Register now",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary),
                 ),
               ),
             ],
