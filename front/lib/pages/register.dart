@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:aka_chat/auth/auth_service.dart';
+import 'package:aka_chat/services/auth/auth_service.dart';
 import 'package:aka_chat/components/my_button.dart';
 import 'package:aka_chat/components/my_textfield.dart';
 import 'package:flutter/material.dart';

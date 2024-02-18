@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:aka_chat/auth/auth_gate.dart';
-import 'package:aka_chat/auth/login_or_register.dart';
+import 'package:aka_chat/services/auth/auth_gate.dart';
+import 'package:aka_chat/services/auth/login_or_register.dart';
 import 'package:aka_chat/firebase_options.dart';
 import 'package:aka_chat/pages/login.dart';
 import 'package:aka_chat/themes/light_mode.dart';
