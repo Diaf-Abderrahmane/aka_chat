@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:aka_chat/components/user_tile.dart';
 import 'package:aka_chat/pages/chat_page.dart';
 import 'package:aka_chat/services/auth/auth_service.dart';
@@ -34,7 +32,6 @@ class HomePage extends StatelessWidget {
           }
 
           //loading
-
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Text("Loading..");
           }

@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //logo
-          Icon(
+          const Icon(
             Icons.message,
             size: 60,
           ),
@@ -71,7 +71,7 @@ class LoginPage extends StatelessWidget {
             controller: _emailController,
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
 
@@ -82,7 +82,7 @@ class LoginPage extends StatelessWidget {
             controller: _pwlController,
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
 
@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
             onTap: () => login(context),
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
 
