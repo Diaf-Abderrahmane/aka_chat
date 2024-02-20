@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
 // import 'dart:html';
-import 'dart:js';
+// import 'dart:js';
 
 import 'package:aka_chat/components/my_textfield.dart';
 import 'package:aka_chat/services/auth/auth_service.dart';
@@ -78,7 +78,24 @@ class ChatPage extends StatelessWidget {
   Widget _buildMessageListItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-    return Text(data["messages"]);
+    // is current user
+    bool isCurrentUser = data['senderID'] == _authService.getCurrentUser()!.uid;
+
+    // alignment
+    var alignment =
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment:
+            isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Text(data['message']),
+        ],
+      ),
+      alignment: alignment,
+    );
   }
 
   // build message input UI
