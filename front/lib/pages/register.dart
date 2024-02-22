@@ -74,6 +74,7 @@ class RegisterPage extends StatelessWidget {
 
           //email textfield
           MyTextField(
+            focusNode: null,
             hintText: "Email",
             obscureText: false,
             controller: _emailController,
@@ -85,6 +86,7 @@ class RegisterPage extends StatelessWidget {
 
           //password textfield
           MyTextField(
+            focusNode: null,
             hintText: "Password",
             obscureText: true,
             controller: _pwlController,
@@ -96,6 +98,7 @@ class RegisterPage extends StatelessWidget {
 
           //confirm password textfield
           MyTextField(
+            focusNode: null,
             hintText: "Confirm password",
             obscureText: true,
             controller: _confirmPwController,

@@ -34,9 +34,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
+
     // add listener to focus mode
     myFocusNode.addListener(() {
-      if (myFocusNode.addListener(() { 
+      if (myFocusNode.hasFocus) {
         // cause  a delay so that the keyboard has time to show up
         // then the amount of remaining space will be calculated,
         // then scroll down
@@ -44,13 +45,31 @@ class _ChatPageState extends State<ChatPage> {
           const Duration(microseconds: 500),
           () => scrollDown(),
         );
-
-      })) {
-        
-      } else {
-        
       }
-    })
+    });
+
+    // wait for listview to be built, then scroll to bottom
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () => scrollDown(),
+    );
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  // scroll controller
+  final ScrollController _scrollController = ScrollController();
+  void scrollDown() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   // send message function
@@ -64,8 +83,10 @@ class _ChatPageState extends State<ChatPage> {
       // clear the controller
       _messageController.clear();
     }
+    scrollDown();
   }
 
+  // Main Scaffold
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +126,7 @@ class _ChatPageState extends State<ChatPage> {
 
           //return List view
           return ListView(
+            controller: _scrollController,
             children: snapshot.data!.docs
                 .map((doc) => _buildMessageListItem(doc))
                 .toList(),
@@ -142,6 +164,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
               child: MyTextField(
+                  focusNode: myFocusNode,
                   hintText: "Type a message",
                   obscureText: false,
                   controller: _messageController)),
